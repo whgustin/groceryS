@@ -54,9 +54,7 @@ router.put('/update/:id', function(req, res){
     var quantity = req.body.item.quantity
     var description = req.body.item.description
 
-    Items
-        .update({
-            data: data,
+    Items.update({
             name: name,
             category: category,
             price: price,
@@ -67,7 +65,6 @@ router.put('/update/:id', function(req, res){
         ).then(
             function updateSuccess(updatedLog) {
                 res.json({
-                    data: data,
                     name: name,
                     category: category,
                     price: price,

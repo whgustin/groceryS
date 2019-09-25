@@ -12,7 +12,8 @@ router.post('/create', (req, res) => {
         category: req.body.item.category,
         price: req.body.item.price,
         quantity: req.body.item.quantity,
-        description: req.body.item.description
+        description: req.body.item.description,
+        owner: req.user.id
     })
     .then(
         createSuccess = item => {

@@ -7,5 +7,5 @@ module.exports = function (sequelize, DataTypes) {
         description: DataTypes.STRING,
         price: DataTypes.INTEGER,
         quantity: DataTypes.INTEGER,
-    });
-};
+        owner: DataTypes.INTEGER
+})};

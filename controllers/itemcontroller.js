@@ -80,7 +80,7 @@ router.delete('/delete/:id', function(req, res) {
 
     router.put('/:id', (req,res) => {
         Items.update(req.body.item,{
-            where:{owner: req.params.id, userID: req.user.id}
+            where:{owner: req.params.id, id: req.user.id}
         })
             .then(item => res.status(200).json(item))
             .catch(err => res.json({error: err}));

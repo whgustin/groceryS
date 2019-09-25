@@ -7,8 +7,8 @@ var item = require('./controllers/itemcontroller');
 var sequelize = require('./db');
 
 
-sequelize.sync();
-// sequelize.sync({force: true});
+// sequelize.sync();
+sequelize.sync({force: true});
 
 app.use(express.json()); //1
 app.use(require('./middleware/headers'));

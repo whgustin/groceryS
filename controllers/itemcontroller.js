@@ -79,7 +79,7 @@ router.delete('/delete/:id', function(req, res) {
 //     });
 
     router.put('/:id', (req,res) => {
-        Items.update(req.body.item,{
+        Item.update(req.body.item,{
             where:{id: req.params.id, owner: req.user.id}
         })
             .then(item => res.status(200).json(item))

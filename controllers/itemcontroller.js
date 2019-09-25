@@ -8,11 +8,11 @@ var validatesession = require('../middleware/validate-session');
 //Create New Item
 router.post('/create', (req, res) => {
     Item.create({
-        name: req.body.name,
-        category: req.body.category,
-        price: req.body.price,
-        quantity: req.body.quantity,
-        description: req.body.description
+        name: req.body.item.name,
+        category: req.body.item.category,
+        price: req.body.item.price,
+        quantity: req.body.item.quantity,
+        description: req.body.item.description
     })
     .then(
         createSuccess = item => {
@@ -46,12 +46,12 @@ router.delete('/delete/:id', function(req, res) {
 // Update Item
 
 router.put('/update/:id', function(req, res){
-    var data = req.params.id
-    var name = req.body.name
-    var category = req.body.category
-    var price = req.body.price
-    var quantity = req.body.quantity
-    var description = req.body.description
+    var data = req.params.item.id
+    var name = req.body.item.name
+    var category = req.body.item.category
+    var price = req.body.item.price
+    var quantity = req.body.item.quantity
+    var description = req.body.item.description
 
     Items
         .update({
@@ -80,7 +80,11 @@ router.put('/update/:id', function(req, res){
         )
 });
 
-
-
+//Get All Items
+router.get('/allitems', (req, res) => {
+    Item.findAll()
+        .then(item => res.status(200).json(item))
+        .catch(err => res.status(500).json({ error: err }))
+})
 
 module.exports = router;

@@ -46,43 +46,52 @@ router.delete('/delete/:id', function(req, res) {
 
 // Update Item
 
-router.put('/update/:id', function(req, res){
-    var data = req.params.id
-    var name = req.body.item.name
-    var category = req.body.item.category
-    var price = req.body.item.price
-    var quantity = req.body.item.quantity
-    var description = req.body.item.description
+// router.put('/update/:id', function(req, res){
+//     var data = req.params.id
+//     var name = req.body.item.name
+//     var category = req.body.item.category
+//     var price = req.body.item.price
+//     var quantity = req.body.item.quantity
+//     var description = req.body.item.description
 
-    Items.update({
-            name: name,
-            category: category,
-            price: price,
-            quantity: quantity,
-            description: description
-        },
-        {where: {id: data}} 
-        ).then(
-            function updateSuccess(updatedLog) {
-                res.json({
-                    name: name,
-                    category: category,
-                    price: price,
-                    quantity: quantity,
-                    description: description
-                });
-            }, 
-            function updateError(err){
-                res.send(500, err.message);
-            }
-        )
-});
+//     Items.update({
+//             name: name,
+//             category: category,
+//             price: price,
+//             quantity: quantity,
+//             description: description
+//         },
+//         {where: {id: data}} 
+//         ).then(
+//             function updateSuccess(updatedLog) {
+//                 res.json({
+//                     name: name,
+//                     category: category,
+//                     price: price,
+//                     quantity: quantity,
+//                     description: description
+//                 });
+//             }, 
+//             function updateError(err){
+//                 res.send(500, err.message);
+//             }
+//         )
+//     });
 
+    router.put('/:id', (req,res) => {
+        Items.update(req.body.item,{
+            where:{owner: req.params.id}
+        })
+            .then(item => res.status(200).json(item))
+            .catch(err => res.json({error: err}));
+    })
+    
 //Get All Items
 router.get('/allitems', (req, res) => {
     Item.findAll()
         .then(item => res.status(200).json(item))
         .catch(err => res.status(500).json({ error: err }))
 })
+
 
 module.exports = router;

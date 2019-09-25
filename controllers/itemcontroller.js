@@ -47,7 +47,6 @@ router.delete('/delete/:id', function(req, res) {
 // Update Item
 
 router.put('/update/:id', function(req, res){
-    var data = req.params.item.id
     var name = req.body.item.name
     var category = req.body.item.category
     var price = req.body.item.price
@@ -56,7 +55,6 @@ router.put('/update/:id', function(req, res){
 
     Items
         .update({
-            data: data,
             name: name,
             category: category,
             price: price,
